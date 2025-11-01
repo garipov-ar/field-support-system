@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<body>
+<div layout:fragment="content">
+    <h2>Все документы</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>Оборудование</th>
+            <th>Версия</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doc : ${documents}">
+            <td th:text="${doc.title}"></td>
+            <td th:text="${doc.category}"></td>
+            <td th:text="${doc.equipment}"></td>
+            <td th:text="${doc.version}"></td>
+            <td>
+                <span th:if="${doc.current}" class="badge bg-success">Актуальный</span>
+                <span th:unless="${doc.current}" class="badge bg-secondary">Архивный</span>
+            </td>
+            <td>
+                <form th:action="@{/admin/toggle-status/{id}(id=${doc.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-sm"
+                            th:classappend="${doc.current} ? 'btn-warning' : 'btn-success'">
+                        <span th:if="${doc.current}">В архив</span>
+                        <span th:unless="${doc.current}">Сделать актуальным</span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
