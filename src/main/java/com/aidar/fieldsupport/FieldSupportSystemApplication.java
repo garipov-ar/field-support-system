@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FieldSupportSystemApplication {
     public static void main(String[] args) {
-        // Загружаем .env (если есть)
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         System.setProperty("TELEGRAM_BOT_TOKEN", dotenv.get("TELEGRAM_BOT_TOKEN"));
         System.setProperty("TELEGRAM_BOT_USERNAME", dotenv.get("TELEGRAM_BOT_USERNAME"));

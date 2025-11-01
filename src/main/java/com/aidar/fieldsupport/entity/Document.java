@@ -8,7 +8,7 @@ import java.util.UUID;
 @Table(name = "documents", indexes = {
         @Index(name = "idx_category", columnList = "category"),
         @Index(name = "idx_equipment", columnList = "equipment"),
-        @Index(name = "idx_status", columnList = "status")
+        @Index(name = "idx_is_current", columnList = "is_current")
 })
 public class Document {
 
@@ -17,60 +17,58 @@ public class Document {
     private UUID id;
 
     @Column(nullable = false)
-    private String title; // Название документа
+    private String title;
 
     @Column(nullable = false)
-    private String category; // "INSTRUCTION", "FIRMWARE", "CONFIG", "PRICE"
+    private String category; // INSTRUCTION, FIRMWARE, CONFIG, PRICE
 
     @Column(nullable = false)
-    private String equipment; // Модель оборудования (например, "XG-200")
+    private String equipment;
 
     @Column(nullable = false)
-    private String version; // Версия прошивки/документа
+    private String version;
 
     @Column(nullable = false)
-    private String fileName; // Имя файла на диске или в облаке
+    private String fileName; // original name
+
+    @Column(nullable = false)
+    private String internalFileName; // unique name on disk
 
     @Column(columnDefinition = "TEXT")
-    private String description; // Описание
+    private String description;
 
     @Column(nullable = false)
-    private boolean isCurrent = true; // true = актуальный, false = архивный
+    private boolean isCurrent = true;
 
     @Column(nullable = false)
     private Instant updatedAt = Instant.now();
 
     @Column(nullable = false)
-    private String updatedBy; // Кто обновил (логин или Telegram ID)
+    private String updatedBy;
 
-    // Геттеры и сеттеры
+    // Getters
     public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
-
     public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
     public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
-
     public String getEquipment() { return equipment; }
-    public void setEquipment(String equipment) { this.equipment = equipment; }
-
     public String getVersion() { return version; }
-    public void setVersion(String version) { this.version = version; }
-
     public String getFileName() { return fileName; }
-    public void setFileName(String fileName) { this.fileName = fileName; }
-
+    public String getInternalFileName() { return internalFileName; }
     public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
     public boolean isCurrent() { return isCurrent; }
-    public void setCurrent(boolean current) { isCurrent = current; }
-
     public Instant getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
-
     public String getUpdatedBy() { return updatedBy; }
+
+    // Setters
+    public void setId(UUID id) { this.id = id; }
+    public void setTitle(String title) { this.title = title; }
+    public void setCategory(String category) { this.category = category; }
+    public void setEquipment(String equipment) { this.equipment = equipment; }
+    public void setVersion(String version) { this.version = version; }
+    public void setFileName(String fileName) { this.fileName = fileName; }
+    public void setInternalFileName(String internalFileName) { this.internalFileName = internalFileName; }
+    public void setDescription(String description) { this.description = description; }
+    public void setCurrent(boolean current) { isCurrent = current; }
+    public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
     public void setUpdatedBy(String updatedBy) { this.updatedBy = updatedBy; }
 }
