@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>FieldSupport CMS</title>
@@ -12,16 +11,18 @@
         <a class="navbar-brand" href="/admin/dashboard">FieldSupport CMS</a>
         <div class="navbar-nav ms-auto">
             <a class="nav-link" href="/admin/upload">Загрузить</a>
+            <a class="nav-link" href="/admin/users">Пользователи</a>
             <a class="nav-link" href="/logout">Выйти</a>
         </div>
     </nav>
 
-    <div th:if="${param.success}" class="alert alert-success mt-3">
-        Документ успешно загружен!
-    </div>
-    <div th:if="${errors}" class="alert alert-danger mt-3" th:text="${errors}"></div>
+    <div th:if="${param.uploaded}" class="alert alert-success mt-3">Документ успешно загружен!</div>
+    <div th:if="${param.created}" class="alert alert-success mt-3">Пользователь создан!</div>
+    <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
 
-    <div layout:fragment="content"></div>
+    <div th:fragment="layout(content)">
+        <div th:replace="${content}"></div>
+    </div>
 </div>
 </body>
 </html>

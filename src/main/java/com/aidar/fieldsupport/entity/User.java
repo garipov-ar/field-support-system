@@ -1,7 +1,7 @@
+// com.aidar.fieldsupport.entity.User
 package com.aidar.fieldsupport.entity;
 
 import jakarta.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -12,15 +12,15 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username; // например: support@company.com
+    private String username;
 
     @Column(nullable = false)
-    private String password; // хешированный
+    private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    private List<String> roles; // ["ROLE_SUPPORT", "ROLE_ADMIN"]
+    private List<String> roles;
 
     // Геттеры и сеттеры
     public Long getId() { return id; }

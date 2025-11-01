@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<html th:replace="~{layout :: layout(~{::content})}">
 <body>
-<div layout:fragment="content">
+<div th:fragment="content">
     <h2>Загрузить документ</h2>
     <form th:action="@{/admin/upload}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-            <label class="form-label">Название</label>
+            <label class="form-label">Название документа</label>
             <input type="text" name="title" class="form-control" required>
         </div>
         <div class="mb-3">
@@ -18,7 +18,7 @@
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label">Оборудование</label>
+            <label class="form-label">Оборудование (модель)</label>
             <input type="text" name="equipment" class="form-control" required>
         </div>
         <div class="mb-3">
@@ -30,7 +30,7 @@
             <textarea name="description" class="form-control" required></textarea>
         </div>
         <div class="mb-3">
-            <label class="form-label">Файл</label>
+            <label class="form-label">Файл (PDF, ZIP, DOCX и др.)</label>
             <input type="file" name="file" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Загрузить</button>
